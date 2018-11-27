@@ -13,7 +13,7 @@ using namespace sdbus;
 class Concatenated : public ProxyInterfaces<org::sdbuscpp::Concatenator_proxy>
 {
   public:
-    Concatenated(string destination, string objectPath) : sdbus::ProxyInterfaces<org::sdbuscpp::Concatenator_proxy>(move(destination), move(objectPath))
+    Concatenated(IConnection &connection, string destination, string objectPath) : ProxyInterfaces<org::sdbuscpp::Concatenator_proxy>(connection, move(destination), move(objectPath))
     {
     }
 
@@ -24,7 +24,7 @@ class Concatenated : public ProxyInterfaces<org::sdbuscpp::Concatenator_proxy>
   protected:
     void onConcatenated(const string &concatenatedString) override
     {
-        cout << printf("Concatenated: %s", concatenatedString) << endl;
+        cout << printf("Concatenated: %s", concatenatedString.c_str()) << endl;
     }
 };
 

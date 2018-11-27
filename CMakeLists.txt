@@ -3,6 +3,7 @@
 ########################################
 cmake_minimum_required(VERSION 3.10.2)
 project(dbus_client_server)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 set(CMAKE_BUILD_TYPE Debug)
 add_definitions("-std=c++17")
 
@@ -11,16 +12,8 @@ add_definitions("-std=c++17")
 ########################################
 set(DBUS_SCHEMAS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dbus_schemas)
 set(INCLUDES_DIR ${CMAKE_CURRENT_SOURCE_DIR}/includes)
-set(DBUS_SCHEMA_SRCS
-    ${DBUS_SCHEMAS_DIR}/concatenator-client.h
-    ${DBUS_SCHEMAS_DIR}/concatenator-server.h)
-set(HEADER_SRCS
-    ${INCLUDES_DIR}/Concatenated.h
-    ${INCLUDES_DIR}/Concatenator.h)
 message(STATUS "DBUS_SCHEMAS_DIR=" ${DBUS_SCHEMAS_DIR})
 message(STATUS "INCLUDES_DIR=" ${INCLUDES_DIR})
-message(STATUS "DBUS_SCHEMA_SRCS=" ${DBUS_SCHEMA_SRCS})
-message(STATUS "HEADER_SRCS=" ${HEADER_SRCS})
 
 ########################################
 #      INCLUDE CONAN DEPENDENCIES      #
@@ -50,10 +43,10 @@ message(STATUS "XML2CPP_OUTPUT=" ${XML2CPP_OUTPUT})
 ########################################
 #      OUTPUT FINAL EXECUTABLE(S)      #
 ########################################
-add_executable(dbus_client main_concatenated.cpp ${HEADER_SRCS} ${DBUS_SCHEMA_SRCS})
-target_include_directories(dbus_client PUBLIC ${DBUS_SCHEMAS_DIR} ${INCLUDES_DIR}})
-target_link_libraries(dbus_client ${DBUS_LIBS} ${CONAN_LIBS})
+add_executable(dbus_client main_concatenated.cpp)
+target_include_directories(dbus_client PUBLIC ${DBUS_SCHEMAS_DIR} ${INCLUDES_DIR})
+target_link_libraries(dbus_client ${SDBUS_LIBS} ${CONAN_LIBS})
 
-add_executable(dbus_server main_concatenator.cpp ${HEADER_SRCS} ${DBUS_SCHEMA_SRCS})
+add_executable(dbus_server main_concatenator.cpp)
 target_include_directories(dbus_server PUBLIC ${DBUS_SCHEMAS_DIR} ${INCLUDES_DIR})
 target_link_libraries(dbus_server ${SDBUS_LIBS} ${CONAN_LIBS})

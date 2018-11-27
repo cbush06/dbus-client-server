@@ -5,7 +5,9 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/local/include/sdbus-c++/**",
-                "${workspaceFolder}"
+                "${workspaceFolder}",
+                "${workspaceFolder}/dbus_schemas",
+                "${workspaceFolder}/includes"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
