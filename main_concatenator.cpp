@@ -15,4 +15,6 @@ int main(int argc, char* argv[]) {
     Concatenator concatenator(*connection, objectPath);
 
     connection->enterProcessingLoop();
+
+    return 0;
 }
